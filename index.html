@@ -61,8 +61,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
                     <a href="#" class="language" onclick="toggleLang();"> {{hindiLng}} </a>-->
                     <form name="hongkiat" id="hongkiat-form" method="post" action="#">  
                         <h2>{{fromTxt}}</h2>
-                        <section id="aligned">  
-                            <input type="text" name="txtName" id="txtName" placeholder="Your name" autocomplete="off" tabindex="1" class="txtinput" autofocus>
+                        <section id="aligned">
+                            <label class="message txtName">Please enter your name</label>
+                            <input type="text" name="txtName" id="txtName" placeholder="Your name" autocomplete="off" tabindex="1" class="txtinput" autofocus title="Please enter your name">
                             <input type="text" name="txtAddress1" id="txtAddress1" placeholder="Your Address 1" autocomplete="off" tabindex="2" class="txtinput">  
                             <input type="text" name="txtAddress2" id="txtAddress2" placeholder="Your Address 2" autocomplete="off" tabindex="3" class="txtinput">  
                             <input type="text" name="txtCity" id="txtCity" placeholder="Your City" autocomplete="off" tabindex="4" class="txtinput" style="width:30%; float:left;">  
@@ -75,6 +76,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
                         <section id="aligned">  
                             Public Information Officer
                             <!--<input type="text" name="txtPIODesignation" id="txtPIODesignation" placeholder="Designation of the PIO (optional)" autocomplete="off" tabindex="10" class="txtinput"> -->
+                            <label class="message txtPIOOffice">This field is required</label>
                             <input type="text" name="txtPIOOffice" id="txtPIOOffice" placeholder="Office of Public Authority (PA)" autocomplete="off" tabindex="11" class="txtinput">  
                             <input type="text" name="txtPIOAddress1" id="txtPIOAddress1" placeholder="Address 1 of PA" autocomplete="off" tabindex="12" class="txtinput">  
                             <input type="text" name="txtPIOAddress2" id="txtPIOAddress2" placeholder="Address 2 of PA" autocomplete="off" tabindex="13" class="txtinput">  
@@ -133,9 +135,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
                             <label for="radioFeeDD">{{ddTxt}}<i style="color:#666">{{ddStatesTxt}}</i></label>
                         </section>  
 
-                        <section id="buttons" style="margin-top: 20px">  
-                            <input type="button" name="btnGenerate" id="btnGenerate" class="submitbtn" tabindex="100" value="Generate">  
-                            <input type="reset" name="reset" id="resetbtn" class="resetbtn" value="Reset" tabindex="-1">  
+                        <section id="buttons" style="margin-top: 20px">
+                            <input type="button" name="btnGenerate" id="btnGenerate" class="submitbtn" tabindex="100" value="Generate">
+                            <input type="button" name="btnSaveRTI" id="btnSaveRTI" class="savebtn" tabindex="100" value="SaveRTI" onclick="saveToLocalStorage()">
+                            <input type="reset" name="reset" id="resetbtn" class="resetbtn" value="Reset" tabindex="-1" onclick="clearLocalStorage()">
                             <a id="saveButton" class="resetbtn" tabindex="101" style="padding-top:14px; height:2em"> {{saveRtiTxt}} </a>
                             <br style="clear:both;">  
                         </section>  

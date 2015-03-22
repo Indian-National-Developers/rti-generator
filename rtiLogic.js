@@ -53,7 +53,6 @@ function setup() {
     $( "#txtAddress2" ).focus(function() {
         $( "#tipText" ).text(tipAddr2Text);
         $( "#tipContainer" ).offset({top: $(this).offset().top - 100});
-        console.log("address 2");
     });
 
     $( "#txtCity" ).focus(function() {
@@ -213,9 +212,11 @@ function setup() {
     });
 
     $( "#btnGenerate" ).off().on('click',function() {
-        console.log('btn generate');
-		saveToLocalStorage();
-        confirmrti();
+        if(validateFields()) {
+            confirmrti();
+        }else{
+            $(window).scrollTop($("#mainBody").offset().top);
+        }
     }); 
 
     //confirmrti();
@@ -224,6 +225,25 @@ function setup() {
 
     angular.element(document.getElementById('mainBody')).scope().refreshAll();
 };
+
+function validateFields(){
+    var isValid = true;
+    if($.trim($("#txtName").val()).length == 0){
+        $(".txtName").addClass("visible");
+        isValid = false;
+    }else{
+        $(".txtName").removeClass("visible");
+    }
+    if($.trim($("#txtPIOOffice").val()).length == 0){
+        $(".txtPIOOffice").addClass("visible");
+        $(".txtPIOOffice").focus();
+        isValid = false;
+    }else{
+        $(".txtPIOOffice").removeClass("visible");
+    }
+    return isValid;
+}
+
 
 function updateQuestions(index) {
 
@@ -361,7 +381,7 @@ $(".language").on('click', function(){
 
 function loadFromLocalStorage(){
 	$('#hongkiat-form').find(':input').each(function(){
-		if(!(this.id == "radioPovertyYes" ||this.id == "radioPovertyNo" ||this.id == "radioFeeCourtFee" ||this.id == "radioFeePostalOrder" ||this.id == "radioFeeDD" ||this.id == "btnGenerate" ||  this.id == "resetbtn")){
+		if(!(this.id == "radioPovertyYes" ||this.id == "radioPovertyNo" ||this.id == "radioFeeCourtFee" ||this.id == "radioFeePostalOrder" ||this.id == "radioFeeDD" ||this.id == "btnGenerate" ||  this.id == "resetbtn" || this.id == "btnSaveRTI")){
 			$(this).val(localStorage.getItem(this.id));
 		}
 	})
@@ -369,11 +389,14 @@ function loadFromLocalStorage(){
 
 function saveToLocalStorage(){
 	$('#hongkiat-form').find(':input').each(function(){
-		if(!(this.id == "radioPovertyYes" ||this.id == "radioPovertyNo" ||this.id == "radioFeeCourtFee" ||this.id == "radioFeePostalOrder" ||this.id == "radioFeeDD" ||this.id == "btnGenerate" ||  this.id == "resetbtn")){
+		if(!(this.id == "radioPovertyYes" ||this.id == "radioPovertyNo" ||this.id == "radioFeeCourtFee" ||this.id == "radioFeePostalOrder" ||this.id == "radioFeeDD" ||this.id == "btnGenerate" ||  this.id == "resetbtn" || this.id == "btnSaveRTI")){
 			localStorage.setItem(this.id,this.value);
 		}
 	})
+}
 
+function clearLocalStorage(){
+    localStorage.clear();
 }
 
 
