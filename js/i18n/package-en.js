@@ -63,6 +63,7 @@ var confirmAlertText = '<div><h4>Your RTI is downloaded.<br/>Can you spend 2 min
 
 
 var listQuestions = [
+    [ ],// Custom Blank Template
     [ //EPF Withdrawl
         "1. Copy of inward register showing the date on which my PF/EPF claim application (Form 10 C) was received by your office.",
         "2. Please let me know the balance in my account excluding interest.",
@@ -139,13 +140,12 @@ var listQuestions = [
         "6. Provide me the certified copies of Rules / Regulation / Notification / Order / Circular / Memo / Norms / Guidelines / Direction issued regarding the timeframe of issuing pension.",
         "7. Specify the names and designation of the officers responsible for the non payment of my pension on time. Provide me the certified copy of conduct service rule / regulation having provision to take disciplinary action for non adherence to the timeframe.",
         "8. Please provide details of First Appellate Authority u/s 7(8) of RTI Act, 2005 with detailed postal and email address."
-    ],
-    [ // Custom Blank Template
-        ""
     ]
+
 ];
 
 var listSubjects = [
+    "Custom Blank Template",
     "Status of withdrawal of my Employees Provident Fund (EPF) Account",
     "Status of pending work in any government department on my complaint",
     "Enquiry on MLA Constituency Development Funds",
@@ -153,11 +153,11 @@ var listSubjects = [
     "Status of all corruption complaints from Central Vigilance Commission",
     "Details of Scholarships in a School / College",
     "Details of Ration Card",
-    "Details of Old age/Widow pensions",
-    "Custom Blank Template"
+    "Details of Old age/Widow pensions"
 ];
 
 var listDetails = [
+    "",
     "I have an Employees Provident Fund (EPF) account with my previous employer ____________ (establishment name) establishment based in _____________ (City). I applied for withdrawal of my EPF account on _________ (dd/mm/yy), but I have been waiting for ____ (years) now. I would like to know the following information.",
     "I made a complaint dated __________ (dd/mm/yy) for the following reason ______________. (Copy of complaint is attached). But no satisfactory action has been taken on my complaint so far. The RPAD receipt number is ___________________ (RTXXXXXXXXXXIN).",
     "Enquiry on MLA Constituency Development Funds spent by my MLA.",
@@ -165,8 +165,7 @@ var listDetails = [
     "Status of all corruption complaints received by Central Vigilance Commission.",
     "Provide the following details relating to the Scholarships in ________________ School / College. I am student of ______________________ (class:school / dept:year:college), belongs to the community _______________ (community), and resident of __________ (village / town / city).",
     "I am a resident of ____________ Village / Town / City. I have been given Ration card, card number is __________.",
-    "I receive Old Age/Widow pension. My account no. is __________. But I have not received my pension since __________. I want the following information under Right to Information regarding the same.",
-    ""
+    "I receive Old Age/Widow pension. My account no. is __________. But I have not received my pension since __________. I want the following information under Right to Information regarding the same."
 ];
 
 var applicationStr_01 = "<h3><center>Application for Information under the Right to Information Act, 2005</center></h3>";

@@ -155,8 +155,10 @@
             background: #ff0000;
             color: #ffffff;
             text-align: right;
+            height: 0;
         }
 
         label.visible{
             visibility: visible;
+            height: auto;
         }

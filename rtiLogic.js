@@ -164,13 +164,12 @@ function setup() {
     });
 
     $( "#txtDetail" ).focus(function() {
-        $(this).val($(this).attr("placeholder"));
         $( "#tipText" ).text(tipDetailText);
         $( "#tipContainer" ).offset({top: $(this).offset().top - 100});
     });
 
     $( ".txtInformation" ).focus(function() {
-        $(this).val($(this).attr("placeholder"));
+        //$(this).val($(this).attr("placeholder"));
         var str, rnd;
         rnd = Math.random();
         if (rnd < 0.3) {
@@ -234,12 +233,47 @@ function validateFields(){
     }else{
         $(".txtName").removeClass("visible");
     }
+    if($.trim($("#txtAddress1").val()).length == 0){
+        $(".txtAddress1").addClass("visible");
+        $(".txtAddress1").focus();
+        isValid = false;
+    }else{
+        $(".txtAddress1").removeClass("visible");
+    }
+    if($.trim($("#txtCity").val()).length == 0){
+        $(".txtCity").addClass("visible");
+        $(".txtCity").focus();
+        isValid = false;
+    }else{
+        $(".txtCity").removeClass("visible");
+    }
+    if($.trim($("#txtState").val()).length == 0){
+        $(".txtState").addClass("visible");
+        $(".txtState").focus();
+        isValid = false;
+    }else{
+        $(".txtState").removeClass("visible");
+    }
+    if($.trim($("#txtPIN").val()).length == 0){
+        $(".txtPIN").addClass("visible");
+        $(".txtPIN").focus();
+        isValid = false;
+    }else{
+        $(".txtPIN").removeClass("visible");
+    }
     if($.trim($("#txtPIOOffice").val()).length == 0){
         $(".txtPIOOffice").addClass("visible");
         $(".txtPIOOffice").focus();
         isValid = false;
     }else{
         $(".txtPIOOffice").removeClass("visible");
+    }
+    if($.trim($("#txtDetail").val()).length == 0){
+        $(".txtDetail").addClass("visible");
+        $(".txtDetail").focus();
+        isValid = false;
+    }else{
+        $(".txtDetail").removeClass("visible");
     }
     return isValid;
 }
@@ -249,14 +283,13 @@ function updateQuestions(index) {
 
     $( "#txtSubject" ).attr("placeholder", listSubjects[index]);
 
-    $( "#txtDetail" ).val("");
-    $( "#txtDetail" ).attr("placeholder", listDetails[index]);
+    $( "#txtDetail" ).val(listDetails[index]);
+    //$( "#txtDetail" ).attr("placeholder", listDetails[index]);
 
     for (i = 0; i < listQuestions[index].length; i++) {
-        $( "#txtInfo" + (i+1) ).val("");
-        $( "#txtInfo" + (i+1) ).attr("placeholder", listQuestions[index][i]);
+        $( "#txtInfo" + (i+1) ).val(listQuestions[index][i]);
+        //$( "#txtInfo" + (i+1) ).attr("placeholder", listQuestions[index][i]);
     }
-
     for (i = i; i < 10; i++) {
         $( "#txtInfo" + (i+1) ).val("");
         $( "#txtInfo" + (i+1) ).attr("placeholder", "");
