@@ -275,6 +275,18 @@ function validateFields(){
     }else{
         $(".txtDetail").removeClass("visible");
     }
+    var isQuestionsAvailable = false;
+    for(i=1;i<=10;i++){
+        if($.trim($("#txtInfo"+(i)).val()).length != 0){
+            isQuestionsAvailable = true;
+        }
+    }
+    if(!isQuestionsAvailable){
+        $(".txtInfo1").addClass("visible");
+        isValid = false;
+    }else{
+        $(".txtInfo1").removeClass("visible");
+    }
     return isValid;
 }
 
@@ -426,6 +438,16 @@ function saveToLocalStorage(){
 			localStorage.setItem(this.id,this.value);
 		}
 	})
+    $('<div></div>').appendTo('body')
+        .html(saveAlertText)
+        .dialog({
+            modal: true, title: "Save RTI",
+            buttons: {
+                Ok: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
 }
 
 function clearLocalStorage(){

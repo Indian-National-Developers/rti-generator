@@ -59,6 +59,7 @@ var tipCourtFeeText = "Court Fee Stamps can be bought in Courts, Stamp Vendor, s
 var tipPostalOrderText = "A Postal order of Rs. 10.00 can be bought from Post Office and attached with the RTI Application."
 var tipDDText = "Demand Draft can be drawn in favor of Public Authority and be attached with the RTI Application."
 var confirmAlertText = '<div><h4>Your RTI is downloaded.<br/>Can you spend 2 minutes and give your feedback on this tool</h4></div>'
+var saveAlertText = '<div>Your RTI has been saved.</div>'
 
 
 
