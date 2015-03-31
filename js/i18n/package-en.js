@@ -183,3 +183,17 @@ var applicationStr_11 = "is enclosed in Indian Postal Order numbered ___________
 var applicationStr_12 = "is enclosed in a Demand Draft numbered __________________ in the bank __________________";
 var applicationStr_13 = "<br/>Applicant<br/><br/><br/><br/>";
 
+applicationStr_01 = "Application for Information under the Right to Information Act, 2005";
+applicationStr_02 = "Date:";
+applicationStr_03 = "From";
+applicationStr_04 = "To";
+applicationStr_05 = "Public Information Officer";
+applicationStr_06 = "Subject";
+applicationStr_07 = "Application under Right to Information Act, 2005";
+applicationStr_08 = "Description of Information Required";
+applicationStr_09 = "RTI Application fee of Rs. 10 ";
+applicationStr_10 = "is affixed as court fee Stamp";
+applicationStr_11 = "is enclosed in Indian Postal Order numbered __________________ and dated _____________";
+applicationStr_12 = "is enclosed in a Demand Draft numbered __________________ in the bank __________________";
+applicationStr_13 = "Applicant";
+

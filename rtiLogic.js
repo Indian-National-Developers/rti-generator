@@ -320,7 +320,7 @@ function confirmrti() {
     //window.open(uriContent, 'rti.html');
     //location.href = uriContent;
 
-    setSaveFile(str, "rti.docx", "text/html");
+    setSaveFile(str, "rti.txt", "text/html");
 
     //$( "#saveButton" ).show();
     $('<div></div>').appendTo('body')
@@ -354,40 +354,44 @@ function generate() {
     var curr_year = d.getFullYear();
     var ddate = curr_date + "-" + curr_month + "-" + curr_year;
     str += applicationStr_01 + "\n";
-    str += applicationStr_02 + "\n";
-    str += applicationStr_03;
-    str += ($("#txtName").val() + "<br/>" + "\n");
-    str += ($("#txtAddress1").val() + "<br/>" + "\n");
+    str += applicationStr_02 + "\n\n";
+    str += applicationStr_03 + "\n";
+    str += ($("#txtName").val() + "" + "\n");
+    str += ($("#txtAddress1").val() + "" + "\n");
     if ( $("#txtAddress2").val() != "") {
-        str += ($("#txtAddress2").val() + "<br/>" + "\n");
+        str += ($("#txtAddress2").val() + "" + "\n");
     }
-    str += ($("#txtCity").val() + "<br/>" + "\n");
-    str += ($("#txtState").val() + " - " + $("#txtPIN").val()  + "<br/><br/>" + "\n" + "\n");
-    str += applicationStr_04;
+
+    str += ($("#txtCity").val() + "" + "\n");
+    str += ($("#txtState").val() + " - " + $("#txtPIN").val()  + "" + "\n" + "\n");
+    str += applicationStr_04 + "\n";
     str += applicationStr_05 + "\n";
-    str += ($("#txtPIOOffice").val() + "<br/>" + "\n");
-    str += ($("#txtPIOAddress1").val() + "<br/>" + "\n");
+    str += ($("#txtPIOOffice").val() + "" + "\n");
+    str += ($("#txtPIOAddress1").val() + "" + "\n");
     if ( $("#txtPIOAddress2").val() != "") {
-        str += ($("#txtPIOAddress2").val() + "<br/>" + "\n");
+        str += ($("#txtPIOAddress2").val() + "" + "\n");
     }
-    str += ($("#txtPIOCity").val() + "<br/>" + "\n");
-    str += ($("#txtPIOState").val() + " - " + $("#txtPIOPIN").val()  + "<br/><br/>" + "\n" + "\n");
+
+    str += ($("#txtPIOCity").val() + "" + "\n");
+    str += ($("#txtPIOState").val() + " - " + $("#txtPIOPIN").val()  + "" + "\n" + "\n");
     str += applicationStr_06 + "\n";
-    str += applicationStr_07 + "\n";
+    str += applicationStr_07 + "\n\n";
     str += applicationStr_08 + "\n";
     if ($("#txtDetail").val() != "") {
-        str += ($("#txtDetail").val() + "<br/><br/>" + "\n" + "\n");
+        str += ($("#txtDetail").val() + "" + "\n" + "\n");
     } else {
-        str += ("<br/>" + "\n");
+        str += ("" + "\n");
     }   
+
     for (var i = 0; i < 10; i++) {
         var strQues =  $( "#txtInfo" + (i+1) ).val();
         if (strQues == "") {
             break;
         }
-        str += ( "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" + strQues + "<br/><br/>" + "\n" + "\n");
+        str += ( "    " + strQues + "" + "\n" + "\n");
     }
-    str += applicationStr_09 + "\n";
+
+    str += applicationStr_09;
 
     if ( $( "#radioFeeCourtFee" ).is(":checked") ) {
         str += applicationStr_10 + "\n";
@@ -397,16 +401,40 @@ function generate() {
         str += applicationStr_12 + "\n";
     }
 
-    str += ("<br/>" + "\n");
+    str += ("" + "\n");
     str += applicationStr_13 + "\n";
     str += ( $( "#txtName" ).val() + "\n" );
-
 
     return str;
 }
 
 function setSaveFile(contents, file_name, mime_type) {
 
+    var pom = document.createElement('a');
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(contents));
+    pom.setAttribute('download', file_name);
+
+    pom.style.display = 'none';
+    document.body.appendChild(pom);
+
+    pom.click();
+
+    document.body.removeChild(pom);
+
+    /*
+    $.ajax({
+        type: "POST",
+        url: "api/save.php",
+        data: {'data': contents},
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8'
+    }).done(function( msg ) {
+        console.log( "Data Saved: " + msg );
+        //document.location = 'api/' + msg;
+    });
+    */
+
+    /*
+    // DOCX Saving code
     $.ajax({
         type: "POST",
         url: "api/htmltodocx.php",
@@ -415,7 +443,7 @@ function setSaveFile(contents, file_name, mime_type) {
         console.log( "Data Saved: " + msg );
         document.location = 'api/' + msg;
     });
-
+*/
 }
 
 
