@@ -320,7 +320,7 @@ function confirmrti() {
     //window.open(uriContent, 'rti.html');
     //location.href = uriContent;
 
-    setSaveFile(str, "rti.txt", "text/html");
+    setSaveFile(str, "RTI - " + $('#txtSubject').val()  + ".txt", "text/html");
 
     //$( "#saveButton" ).show();
     $('<div></div>').appendTo('body')
