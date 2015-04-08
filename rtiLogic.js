@@ -22,7 +22,7 @@ var listSubjectsindex = 0
 function setup() {
 
     //console.log("setup");
-    
+
     $.localise(['package'], {language: currentLang, loadBase: false, path: ['', 'js/i18n/']});
     $("#langtxt").html ("Current Language:  " + (currentLang =='en'? englishLang : tamilLang ) );
     
@@ -37,6 +37,7 @@ function setup() {
         imagePath: './img/'
     }); // Customized Browsers
 
+    $( '#txtName' ).focus();
 
     $( "#txtName" ).focus(function() {
         $( "#tipText" ).empty();
@@ -53,7 +54,6 @@ function setup() {
     $( "#txtAddress2" ).focus(function() {
         $( "#tipText" ).text(tipAddr2Text);
         $( "#tipContainer" ).offset({top: $(this).offset().top - 100});
-        console.log("address 2");
     });
 
     $( "#txtCity" ).focus(function() {
@@ -165,13 +165,12 @@ function setup() {
     });
 
     $( "#txtDetail" ).focus(function() {
-        $(this).val($(this).attr("placeholder"));
         $( "#tipText" ).text(tipDetailText);
         $( "#tipContainer" ).offset({top: $(this).offset().top - 100});
     });
 
     $( ".txtInformation" ).focus(function() {
-        $(this).val($(this).attr("placeholder"));
+        //$(this).val($(this).attr("placeholder"));
         var str, rnd;
         rnd = Math.random();
         if (rnd < 0.3) {
@@ -212,28 +211,98 @@ function setup() {
         $( "#tipContainer" ).offset({top: $(this).offset().top - 100});
     });
 
-    $( "#btnGenerate" ).click(function() {
-        confirmrti();
+    $( "#btnGenerate" ).off().on('click',function() {
+        if(validateFields()) {
+            confirmrti();
+        }else{
+            $(window).scrollTop($("#mainBody").offset().top);
+        }
     }); 
 
     //confirmrti();
     updateQuestions(listSubjectsindex);
+	loadFromLocalStorage();
 
     angular.element(document.getElementById('mainBody')).scope().refreshAll();
 };
+
+function validateFields(){
+    var isValid = true;
+    if($.trim($("#txtName").val()).length == 0){
+        $(".txtName").addClass("visible");
+        isValid = false;
+    }else{
+        $(".txtName").removeClass("visible");
+    }
+    if($.trim($("#txtAddress1").val()).length == 0){
+        $(".txtAddress1").addClass("visible");
+        $(".txtAddress1").focus();
+        isValid = false;
+    }else{
+        $(".txtAddress1").removeClass("visible");
+    }
+    if($.trim($("#txtCity").val()).length == 0){
+        $(".txtCity").addClass("visible");
+        $(".txtCity").focus();
+        isValid = false;
+    }else{
+        $(".txtCity").removeClass("visible");
+    }
+    if($.trim($("#txtState").val()).length == 0){
+        $(".txtState").addClass("visible");
+        $(".txtState").focus();
+        isValid = false;
+    }else{
+        $(".txtState").removeClass("visible");
+    }
+    if($.trim($("#txtPIN").val()).length == 0){
+        $(".txtPIN").addClass("visible");
+        $(".txtPIN").focus();
+        isValid = false;
+    }else{
+        $(".txtPIN").removeClass("visible");
+    }
+    if($.trim($("#txtPIOOffice").val()).length == 0){
+        $(".txtPIOOffice").addClass("visible");
+        $(".txtPIOOffice").focus();
+        isValid = false;
+    }else{
+        $(".txtPIOOffice").removeClass("visible");
+    }
+    if($.trim($("#txtDetail").val()).length == 0){
+        $(".txtDetail").addClass("visible");
+        $(".txtDetail").focus();
+        isValid = false;
+    }else{
+        $(".txtDetail").removeClass("visible");
+    }
+    var isQuestionsAvailable = false;
+    for(i=1;i<=10;i++){
+        if($.trim($("#txtInfo"+(i)).val()).length != 0){
+            isQuestionsAvailable = true;
+        }
+    }
+    if(!isQuestionsAvailable){
+        $(".txtInfo1").addClass("visible");
+        isValid = false;
+    }else{
+        $(".txtInfo1").removeClass("visible");
+    }
+    return isValid;
+}
+
 
 function updateQuestions(index) {
 
     $( "#txtSubject" ).attr("placeholder", listSubjects[index]);
 
-    $( "#txtDetail" ).val("");
-    $( "#txtDetail" ).attr("placeholder", listDetails[index]);
+    $( "#txtDetail" ).val(listDetails[index]);
+    //$( "#txtDetail" ).attr("placeholder", listDetails[index]);
 
     for (i = 0; i < listQuestions[index].length; i++) {
-        $( "#txtInfo" + (i+1) ).val("");
-        $( "#txtInfo" + (i+1) ).attr("placeholder", listQuestions[index][i]);
+        $( "#txtInfo" + (i+1) ).val(listQuestions[index][i]);
+        //$( "#txtInfo" + (i+1) ).attr("placeholder", listQuestions[index][i]);
     }
-
     for (i = i; i < 10; i++) {
         $( "#txtInfo" + (i+1) ).val("");
         $( "#txtInfo" + (i+1) ).attr("placeholder", "");
@@ -245,14 +314,14 @@ function confirmrti() {
 
     var str = generate();
 
-    console.log(str);
+    //console.log(str);
 
     //var uriContent = "data:application/octet-stream," + encodeURIComponent(str);
 
     //window.open(uriContent, 'rti.html');
     //location.href = uriContent;
 
-    setSaveFile(str, "rti.html", "text/html");
+    setSaveFile(str, "RTI - " + $('#txtSubject').val()  + ".txt", "text/html");
 
     //$( "#saveButton" ).show();
     $('<div></div>').appendTo('body')
@@ -285,78 +354,132 @@ function generate() {
     var curr_month = d.getMonth() + 1; //Months are zero based
     var curr_year = d.getFullYear();
     var ddate = curr_date + "-" + curr_month + "-" + curr_year;
-    str += ("<!DOCTYPE html><html>");
-    str += ("<head><style> h4 { padding: 0px; margin: 0px; } </style></head>")
-    str += applicationStr_01;
-    str += applicationStr_02;
-    str += applicationStr_03;
-    str += ($("#txtName").val() + "<br/>");
-    str += ($("#txtAddress1").val() + "<br/>");
+    str += applicationStr_01 + "\n";
+    str += applicationStr_02 + "\n\n";
+    str += applicationStr_03 + "\n";
+    str += ($("#txtName").val() + "" + "\n");
+    str += ($("#txtAddress1").val() + "" + "\n");
     if ( $("#txtAddress2").val() != "") {
-        str += ($("#txtAddress2").val() + "<br/>");
+        str += ($("#txtAddress2").val() + "" + "\n");
     }
-    str += ($("#txtCity").val() + "<br/>");
-    str += ($("#txtState").val() + " - " + $("#txtPIN").val()  + "<br/><br/>");
-    str += applicationStr_04;
-    str += applicationStr_05;
-    str += ($("#txtPIOOffice").val() + "<br/>");
-    str += ($("#txtPIOAddress1").val() + "<br/>");
+
+    str += ($("#txtCity").val() + "" + "\n");
+    str += ($("#txtState").val() + " - " + $("#txtPIN").val()  + "" + "\n" + "\n");
+    str += applicationStr_04 + "\n";
+    str += applicationStr_05 + "\n";
+    str += ($("#txtPIOOffice").val() + "" + "\n");
+    str += ($("#txtPIOAddress1").val() + "" + "\n");
     if ( $("#txtPIOAddress2").val() != "") {
-        str += ($("#txtPIOAddress2").val() + "<br/>");
+        str += ($("#txtPIOAddress2").val() + "" + "\n");
     }
-    str += ($("#txtPIOCity").val() + "<br/>");
-    str += ($("#txtPIOState").val() + " - " + $("#txtPIOPIN").val()  + "<br/><br/>");
-    str += applicationStr_06;
-    str += applicationStr_07;
-    str += applicationStr_08;
+
+    str += ($("#txtPIOCity").val() + "" + "\n");
+    str += ($("#txtPIOState").val() + " - " + $("#txtPIOPIN").val()  + "" + "\n" + "\n");
+    str += applicationStr_06 + "\n";
+    str += applicationStr_07 + "\n\n";
+    str += applicationStr_08 + "\n";
     if ($("#txtDetail").val() != "") {
-        str += ($("#txtDetail").val() + "<br/><br/>");
+        str += ($("#txtDetail").val() + "" + "\n" + "\n");
     } else {
-        str += ("<br/>");
+        str += ("" + "\n");
     }   
+
     for (var i = 0; i < 10; i++) {
         var strQues =  $( "#txtInfo" + (i+1) ).val();
         if (strQues == "") {
             break;
         }
-        str += ( "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" + strQues + "<br/><br/>");
+        str += ( "    " + strQues + "" + "\n" + "\n");
     }
+
     str += applicationStr_09;
 
     if ( $( "#radioFeeCourtFee" ).is(":checked") ) {
-        str += applicationStr_10;
+        str += applicationStr_10 + "\n";
     } else if ( $( "#radioFeePostalOrder" ).is(":checked") ) {
-        str += applicationStr_11;
+        str += applicationStr_11 + "\n";
     } else if ( $( "#radioFeeDD" ).is(":checked") ) {
-        str += applicationStr_12;
+        str += applicationStr_12 + "\n";
     }
 
-    str += ("<br/>");
-    str += applicationStr_13;
-    str += ( $( "#txtName" ).val() );
-
-    str += ("</body></html>");
+    str += ("" + "\n");
+    str += applicationStr_13 + "\n";
+    str += ( $( "#txtName" ).val() + "\n" );
 
     return str;
 }
 
 function setSaveFile(contents, file_name, mime_type) {
-    var a = document.getElementById('saveButton');
-    mime_type = mime_type || 'application/octet-stream'; // text/html, image/png, et c
-    if (file_name) a.setAttribute('download', file_name);
-    a.href = 'data:'+ mime_type +';base64,'+ btoa(contents || '');
-    a.click();
+
+    var pom = document.createElement('a');
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(contents));
+    pom.setAttribute('download', file_name);
+
+    pom.style.display = 'none';
+    document.body.appendChild(pom);
+
+    pom.click();
+
+    document.body.removeChild(pom);
+
+    /*
+    $.ajax({
+        type: "POST",
+        url: "api/save.php",
+        data: {'data': contents},
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8'
+    }).done(function( msg ) {
+        console.log( "Data Saved: " + msg );
+        //document.location = 'api/' + msg;
+    });
+    */
+
+    /*
+    // DOCX Saving code
+    $.ajax({
+        type: "POST",
+        url: "api/htmltodocx.php",
+        data: {'data': contents}
+    }).done(function( msg ) {
+        console.log( "Data Saved: " + msg );
+        document.location = 'api/' + msg;
+    });
+*/
 }
 
 
-function toggleLang(){
-    if (currentLang == 'en') {
-        currentLang = 'ta_IN'
-    }else{
-        currentLang = 'en'
-    }
-    setup(); 
+$(".language").on('click', function(){
+   currentLang = this.id;
+   setup();
+});
+
+function loadFromLocalStorage(){
+	$('#hongkiat-form').find(':input').each(function(){
+		if(!(this.id == "radioPovertyYes" ||this.id == "radioPovertyNo" ||this.id == "radioFeeCourtFee" ||this.id == "radioFeePostalOrder" ||this.id == "radioFeeDD" ||this.id == "btnGenerate" ||  this.id == "resetbtn" || this.id == "btnSaveRTI")){
+			$(this).val(localStorage.getItem(this.id));
+		}
+	})
 }
 
+function saveToLocalStorage(){
+	$('#hongkiat-form').find(':input').each(function(){
+		if(!(this.id == "radioPovertyYes" ||this.id == "radioPovertyNo" ||this.id == "radioFeeCourtFee" ||this.id == "radioFeePostalOrder" ||this.id == "radioFeeDD" ||this.id == "btnGenerate" ||  this.id == "resetbtn" || this.id == "btnSaveRTI")){
+			localStorage.setItem(this.id,this.value);
+		}
+	})
+    $('<div></div>').appendTo('body')
+        .html(saveAlertText)
+        .dialog({
+            modal: true, title: "Save RTI",
+            buttons: {
+                Ok: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+}
 
+function clearLocalStorage(){
+    localStorage.clear();
+}
 

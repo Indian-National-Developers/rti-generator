@@ -34,7 +34,8 @@ var githubText = "github"
 //tip texts
 
 var englishLang = "English"
-var tamilLang = "Tamil"
+var tamilLang = "தமிழ்"
+var hindiLang = "हिंदी"
 var tipNameText = "<ol><li>You should be a Citizen of India to file RTI Application</li><li>Legal entities can't file RTI.</li><li>But its possible for a citizen to apply RTI through address of a legal entity.</li><li>Unfortunately, this application is applicable only to the following regions: Tamil Nadu, Kerala, West Bengal, Chandigarh, Delhi, Himachal Pradesh, Karnataka, Uttarakhand, Tripura, Mizoram, Puducherry, Meghalaya, Noida, Andaman and Nicobar, Goa, Jharkhand, Manipur, Nagaland </li></ol>"
 var tipAddr1Text = "Enter your Address Line 1"
 var tipAddr2Text = "Enter your Address Line 2"
@@ -58,10 +59,12 @@ var tipCourtFeeText = "Court Fee Stamps can be bought in Courts, Stamp Vendor, s
 var tipPostalOrderText = "A Postal order of Rs. 10.00 can be bought from Post Office and attached with the RTI Application."
 var tipDDText = "Demand Draft can be drawn in favor of Public Authority and be attached with the RTI Application."
 var confirmAlertText = '<div><h4>Your RTI is downloaded.<br/>Can you spend 2 minutes and give your feedback on this tool</h4></div>'
+var saveAlertText = '<div>Your RTI has been saved.</div>'
 
 
 
 var listQuestions = [
+    [ ],// Custom Blank Template
     [ //EPF Withdrawl
         "1. Copy of inward register showing the date on which my PF/EPF claim application (Form 10 C) was received by your office.",
         "2. Please let me know the balance in my account excluding interest.",
@@ -138,13 +141,12 @@ var listQuestions = [
         "6. Provide me the certified copies of Rules / Regulation / Notification / Order / Circular / Memo / Norms / Guidelines / Direction issued regarding the timeframe of issuing pension.",
         "7. Specify the names and designation of the officers responsible for the non payment of my pension on time. Provide me the certified copy of conduct service rule / regulation having provision to take disciplinary action for non adherence to the timeframe.",
         "8. Please provide details of First Appellate Authority u/s 7(8) of RTI Act, 2005 with detailed postal and email address."
-    ],
-    [ // Custom Blank Template
-        ""
     ]
+
 ];
 
 var listSubjects = [
+    "Custom Blank Template",
     "Status of withdrawal of my Employees Provident Fund (EPF) Account",
     "Status of pending work in any government department on my complaint",
     "Enquiry on MLA Constituency Development Funds",
@@ -152,11 +154,11 @@ var listSubjects = [
     "Status of all corruption complaints from Central Vigilance Commission",
     "Details of Scholarships in a School / College",
     "Details of Ration Card",
-    "Details of Old age/Widow pensions",
-    "Custom Blank Template"
+    "Details of Old age/Widow pensions"
 ];
 
 var listDetails = [
+    "",
     "I have an Employees Provident Fund (EPF) account with my previous employer ____________ (establishment name) establishment based in _____________ (City). I applied for withdrawal of my EPF account on _________ (dd/mm/yy), but I have been waiting for ____ (years) now. I would like to know the following information.",
     "I made a complaint dated __________ (dd/mm/yy) for the following reason ______________. (Copy of complaint is attached). But no satisfactory action has been taken on my complaint so far. The RPAD receipt number is ___________________ (RTXXXXXXXXXXIN).",
     "Enquiry on MLA Constituency Development Funds spent by my MLA.",
@@ -164,11 +166,10 @@ var listDetails = [
     "Status of all corruption complaints received by Central Vigilance Commission.",
     "Provide the following details relating to the Scholarships in ________________ School / College. I am student of ______________________ (class:school / dept:year:college), belongs to the community _______________ (community), and resident of __________ (village / town / city).",
     "I am a resident of ____________ Village / Town / City. I have been given Ration card, card number is __________.",
-    "I receive Old Age/Widow pension. My account no. is __________. But I have not received my pension since __________. I want the following information under Right to Information regarding the same.",
-    ""
+    "I receive Old Age/Widow pension. My account no. is __________. But I have not received my pension since __________. I want the following information under Right to Information regarding the same."
 ];
 
-var applicationStr_01 = "<body><h3><center>Application for Information under the Right to Information Act, 2005</center></h3>";
+var applicationStr_01 = "<h3><center>Application for Information under the Right to Information Act, 2005</center></h3>";
 var applicationStr_02 = "<pre style='text-align:right'> Date:                             </pre>";
 var applicationStr_03 = "<h4>From</h4>";
 var applicationStr_04 = "<h4>To</h4>";
@@ -181,4 +182,18 @@ var applicationStr_10 = "is affixed as court fee Stamp";
 var applicationStr_11 = "is enclosed in Indian Postal Order numbered __________________ and dated _____________";
 var applicationStr_12 = "is enclosed in a Demand Draft numbered __________________ in the bank __________________";
 var applicationStr_13 = "<br/>Applicant<br/><br/><br/><br/>";
+
+applicationStr_01 = "Application for Information under the Right to Information Act, 2005";
+applicationStr_02 = "Date:";
+applicationStr_03 = "From";
+applicationStr_04 = "To";
+applicationStr_05 = "Public Information Officer";
+applicationStr_06 = "Subject";
+applicationStr_07 = "Application under Right to Information Act, 2005";
+applicationStr_08 = "Description of Information Required";
+applicationStr_09 = "RTI Application fee of Rs. 10 ";
+applicationStr_10 = "is affixed as court fee Stamp";
+applicationStr_11 = "is enclosed in Indian Postal Order numbered __________________ and dated _____________";
+applicationStr_12 = "is enclosed in a Demand Draft numbered __________________ in the bank __________________";
+applicationStr_13 = "Applicant";
 

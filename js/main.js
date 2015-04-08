@@ -13,6 +13,9 @@ rtiApp.controller('rtiIndexController',
 				$scope.feedbackFormTxt = $window.feedbackFormText;
 				$scope.currentlangTxt = $window.currentlangText;
 				$scope.switchLangTxt =  $window.switchLangText;
+                $scope.englishLng = $window.englishLang;
+                $scope.tamilLng = $window.tamilLang;
+                $scope.hindiLng = $window.hindiLang;
 				$scope.fromTxt = $window.fromText;
 				$scope.subjectTxt = $window.subjectText;
 				$scope.applicationTxt = $window.applicationText;

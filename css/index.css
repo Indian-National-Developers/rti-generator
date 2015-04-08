@@ -33,7 +33,7 @@
           outline: 0 none; 
         }
 
-        #buttons .submitbtn {
+        #buttons .submitbtn, #buttons .savebtn  {
           display: block;
           float: left;
           height: 3em;
@@ -70,7 +70,7 @@
           filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2eeaf', endColorstr='#90b026',GradientType=0 );
         }
 
-        #buttons .submitbtn:hover, #buttons .submitbtn:active {
+        #buttons .submitbtn:hover, #buttons .submitbtn:active, #buttons .savebtn:hover, #buttons .savebtn:active {
           border-color: #7c9826 #7c9826 #000;
           color: #fff;
           
@@ -137,4 +137,28 @@
           border-color: #aeaeae;
           
           box-shadow: inset 0 1px 0 rgba(256,256,256,0.4),0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .language{
+            padding: 5px;
+            text-decoration: none;
+            color:#b3d4fc;
+        }
+
+        label.message{
+            visibility: hidden;
+            display: block;
+            font-size: 14px;
+            width: 90%;
+            padding-right: 18px;
+            border-radius: 5px 5px 0 0;
+            background: #ff0000;
+            color: #ffffff;
+            text-align: right;
+            height: 0;
+        }
+
+        label.visible{
+            visibility: visible;
+            height: auto;
         }

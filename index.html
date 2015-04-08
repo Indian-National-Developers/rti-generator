@@ -34,6 +34,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="libs/FileSaver.js"></script>
+        <script src="libs/html-docx.js"></script>
 
     </head>
     <body id='mainBody' ng-app="rtiApp" ng-controller="rtiIndexController">
@@ -42,22 +44,35 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
             <header class="wrapper clearfix">
                 <h1 class="title">{{title}}</h1>
                 <h4 style="text-align: right"> {{tagLine}} <a href="https://docs.google.com/forms/d/1CKRwVQTTF0Z5hywUiqgFiG3d_Sf2ZTsi8YMhhudAClU/viewform">{{feedbackFormTxt}}</a> ::  <a href="http://grayfaceofindia.in/">{{backTxt}}</a> </h4>
+                <div style="text-align: right">
+                    <a href="#" class="language" id="en"> {{englishLng}} </a>
+                    <a href="#" class="language" id="ta_IN"> {{tamilLng}} </a>
+                    <a href="#" class="language" id="hi_IN"> {{hindiLng}} </a>
+                </div>
             </header>
         </div>
 
         <div class="main-container">
             <div class="main wrapper clearfix">
                 <article>
-                    <div id="langtxt"> {{currentLangTxt}}  </div> <a id="switchLang" href="#" onclick="toggleLang();"> {{switchLangTxt}} </a>
+                    <!--<div id="langtxt"> {{currentLangTxt}}  </div>-->
+                    <!--<a href="#" class="language" onclick="toggleLang();"> {{englishLng}} </a>
+                    <a href="#" class="language" onclick="toggleLang();"> {{tamilLng}} </a>
+                    <a href="#" class="language" onclick="toggleLang();"> {{hindiLng}} </a>-->
                     <form name="hongkiat" id="hongkiat-form" method="post" action="#">  
                         <h2>{{fromTxt}}</h2>
-                        <section id="aligned">  
-                            <input type="text" name="txtName" id="txtName" placeholder="Your name" autocomplete="off" tabindex="1" class="txtinput" autofocus>
+                        <section id="aligned">
+                            <label class="message txtName">Please enter your name</label>
+                            <input type="text" name="txtName" id="txtName" placeholder="Your name" autocomplete="off" tabindex="1" class="txtinput" autofocus title="Please enter your name">
+                            <label class="message txtAddress1">Please enter your Address</label>
                             <input type="text" name="txtAddress1" id="txtAddress1" placeholder="Your Address 1" autocomplete="off" tabindex="2" class="txtinput">  
-                            <input type="text" name="txtAddress2" id="txtAddress2" placeholder="Your Address 2" autocomplete="off" tabindex="3" class="txtinput">  
-                            <input type="text" name="txtCity" id="txtCity" placeholder="Your City" autocomplete="off" tabindex="4" class="txtinput" style="width:30%; float:left;">  
-                            <input type="text" name="txtState" id="txtState" placeholder="Your State" autocomplete="off" tabindex="5" class="txtinput" style="width:30%; float:left; margin-left:2%">  
-                            <input type="text" name="txtPIN" id="txtPIN" placeholder="Your PIN Code" autocomplete="off" tabindex="6" class="txtinput" style="width:18%; float:left; margin-left:2%"> 
+                            <input type="text" name="txtAddress2" id="txtAddress2" placeholder="Your Address 2" autocomplete="off" tabindex="3" class="txtinput">
+                            <label class="message txtCity">Please enter your City</label>
+                            <input type="text" name="txtCity" id="txtCity" placeholder="Your City" autocomplete="off" tabindex="4" class="txtinput">
+                            <label class="message txtState">Please enter your State</label>
+                            <input type="text" name="txtState" id="txtState" placeholder="Your State" autocomplete="off" tabindex="5" class="txtinput">
+                            <label class="message txtPIN">Please enter your PIN Code</label>
+                            <input type="text" name="txtPIN" id="txtPIN" placeholder="Your PIN Code" autocomplete="off" tabindex="6" class="txtinput">
                             <br />
                         </section>  
 
@@ -65,6 +80,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
                         <section id="aligned">  
                             Public Information Officer
                             <!--<input type="text" name="txtPIODesignation" id="txtPIODesignation" placeholder="Designation of the PIO (optional)" autocomplete="off" tabindex="10" class="txtinput"> -->
+                            <label class="message txtPIOOffice">This field is required</label>
                             <input type="text" name="txtPIOOffice" id="txtPIOOffice" placeholder="Office of Public Authority (PA)" autocomplete="off" tabindex="11" class="txtinput">  
                             <input type="text" name="txtPIOAddress1" id="txtPIOAddress1" placeholder="Address 1 of PA" autocomplete="off" tabindex="12" class="txtinput">  
                             <input type="text" name="txtPIOAddress2" id="txtPIOAddress2" placeholder="Address 2 of PA" autocomplete="off" tabindex="13" class="txtinput">  
@@ -81,12 +97,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
                         <h2>{{briefDescTxt}}</h2>
                         <section id="aligned">  
-                            <input type="text" name="txtSubject" id="txtSubject" placeholder="" autocomplete="off" tabindex="20" class="txtinput" style="background-image:url('img/downArrow.png'); background-repeat: no-repeat; background-position:right; background-size:5%">  
-                            <textarea rows=4 name="txtDetail" id="txtDetail" placeholder="I have an EPF account with my previous employer XYZ company based in Bangalore. I applied for withdrawal of my EPF account on dd/mm/yy, but I have been waiting for 2 yrs now. I would like to know the following information." autocomplete="off" tabindex="26" class="txtinput" ></textarea> 
+                            <input type="text" name="txtSubject" id="txtSubject" placeholder="" autocomplete="off" tabindex="20" class="txtinput" style="background-image:url('img/downArrow.png'); background-repeat: no-repeat; background-position:right; background-size:5%">
+                            <label class="message txtDetail">Please enter your RTI description</label>
+                            <textarea rows=4 name="txtDetail" id="txtDetail" autocomplete="off" tabindex="26" class="txtinput" ></textarea>
                         </section>  
 
                         <h2>{{descriptionTxt}}</h2>
-                        <section id="infoList">  
+                        <section id="infoList">
+                            <label class="message txtInfo1">Should have atleast one question</label>
                             <textarea rows=3 name="txtInfo1" id="txtInfo1" placeholder="1. Copy of inward register showing the date on which my PF/EPF claim application (Form 10 C) was received by your office." autocomplete="off" tabindex="30" class="txtinput txtInformation" ></textarea> 
                             <textarea rows=3 name="txtInfo2" id="txtInfo2" placeholder="2. Please let me know the balance in my account excluding interest" autocomplete="off" tabindex="30" class="txtinput txtInformation" ></textarea> 
                             <textarea rows=3 name="txtInfo3" id="txtInfo3" placeholder="3. Please let me know the current balance in my account including interest" autocomplete="off" tabindex="30" class="txtinput txtInformation" ></textarea> 
@@ -123,9 +141,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
                             <label for="radioFeeDD">{{ddTxt}}<i style="color:#666">{{ddStatesTxt}}</i></label>
                         </section>  
 
-                        <section id="buttons" style="margin-top: 20px">  
-                            <input type="button" name="btnGenerate" id="btnGenerate" class="submitbtn" tabindex="100" value="Generate">  
-                            <input type="reset" name="reset" id="resetbtn" class="resetbtn" value="Reset" tabindex="-1">  
+                        <section id="buttons" style="margin-top: 20px">
+                            <input type="button" name="btnGenerate" id="btnGenerate" class="submitbtn" tabindex="100" value="Generate" style="margin:4px;">
+                            <input type="button" name="btnSaveRTI" id="btnSaveRTI" class="savebtn" tabindex="100" value="SaveRTI" onclick="saveToLocalStorage()" style="margin:4px;">
+                            <input type="reset" name="reset" id="resetbtn" class="resetbtn" value="Reset" tabindex="-1" onclick="clearLocalStorage()" style="margin:4px;">
                             <a id="saveButton" class="resetbtn" tabindex="101" style="padding-top:14px; height:2em"> {{saveRtiTxt}} </a>
                             <br style="clear:both;">  
                         </section>  
@@ -159,7 +178,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
             <footer class="wrapper">
                 <img src="img/rti-gen-logo.png" width="96" align="right" />
                 <h3>{{bhagatSinghQouteTxt}}</h3>
-                <h4>{{softLicStartTxt}}<a href="http://www.gnu.org/copyleft/gpl.html">{{gnuLicTxt}}</a>. {{srcCodeTxt}} @ <a href="https://github.com/saiy2k/rti-generator">{{githubTxt}}</a></h4>
+                <h4>{{softLicStartTxt}}<a href="http://www.gnu.org/copyleft/gpl.html">{{gnuLicTxt}}</a>. {{srcCodeTxt}} @ <a href="https://github.com/Indian-National-Developers/rti-generator">{{githubTxt}}</a></h4>
             </footer>
         </div>
 
