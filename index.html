@@ -35,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="libs/FileSaver.js"></script>
-        <script src="libs/html-docx.js"></script>
+        <!--<script src="libs/html-docx.js"></script>-->
 
     </head>
     <body id='mainBody' ng-app="rtiApp" ng-controller="rtiIndexController">
@@ -44,11 +44,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
             <header class="wrapper clearfix">
                 <h1 class="title">{{title}}</h1>
                 <h4 style="text-align: right"> {{tagLine}} <a href="https://docs.google.com/forms/d/1CKRwVQTTF0Z5hywUiqgFiG3d_Sf2ZTsi8YMhhudAClU/viewform">{{feedbackFormTxt}}</a> ::  <a href="http://grayfaceofindia.in/">{{backTxt}}</a> </h4>
-                <div style="text-align: right">
+                <div style="float: left; display:inline-block">
+                    <a href="#" style="color: #ddd; text-decoration:none;" id="myCreditsButton">Credits</a>
+                </div>
+                <div style="float: right;">
                     <a href="#" class="language" id="en"> {{englishLng}} </a>
                     <a href="#" class="language" id="ta_IN"> {{tamilLng}} </a>
                     <a href="#" class="language" id="hi_IN"> {{hindiLng}} </a>
                 </div>
+
+                <div class="creditsBox c" style="display: none;">
+                    <h3> Developers </h3>
+                    <p class="ctext1"> Saravanan, Yuvaraj, Rajesh Guna, Saiyasodharan </p>
+                    <h3> Tamil Content</h3>
+                    <p class="ctext2"> Meenu Ram, Tamilvanan, Pravin Mariappan </p>
+                    <h3> Hindi Content</h3>
+                    <p class="ctext3"> Meenu Ram </p>
+                    <h3> Legal Support </h3>
+                    <p class="ctext4"> Alexraj </p>
+                </div>
+
             </header>
         </div>
 
@@ -191,6 +206,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
         <script src="js/jquery.reject.min.js"></script>
         <script src="js/vendor/jquery.localisation.min.js"></script>
         <script src="rtiLogic.js"></script>
+        <script src="libs/jquery.charCycle.js"></script>
         
         <script>
             var _gaq=[['_setAccount','UA-38433521-1'],['_trackPageview']];
@@ -204,6 +220,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
                 //$.getScript('rtiLogic.js', function() {
                     setup();
                 //});
+                $('#myCreditsButton').click(function() {
+                    $('.creditsBox').dialog({
+                        modal: true,
+                        width: 600,
+                        title: 'The Makers'
+                    });
+                });
+
+                $('.c').mouseenter(function(){
+                    if($(this).hasClass('cycling')==false){ 
+                        $(this).charcycle({'target':'.ctext1'});  
+                        $(this).charcycle({'target':'.ctext2'});  
+                        $(this).charcycle({'target':'.ctext3'});  
+                        $(this).charcycle({'target':'.ctext4'});  
+                    }
+                });
+
             });
         </script>
         
